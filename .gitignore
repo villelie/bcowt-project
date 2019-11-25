@@ -1,3 +1,6 @@
+# Ups
+uploads/*
+
 # Logs
 logs
 *.log
