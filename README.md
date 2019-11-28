@@ -4,5 +4,4 @@ Basic Concepts of Web Technology - Project
 ```
 npm i express
 npm i dotenv
-npm i body-parser
 ```
