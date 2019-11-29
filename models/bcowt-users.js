@@ -10,7 +10,7 @@ exports.getAll = async () => {
 		return results;
 	} catch (e) {
 		console.log(e);
-    throw 'db error :(';
+		throw 'db error :(';
 	}
 };
 
@@ -24,9 +24,9 @@ exports.search = async (name) => {
 	}
 };
 
-exports.insert = async (name) => {
+exports.insert = async (name, email, pass) => {
 	try {
-		const [result] = await connection.query('INSERT INTO users (user_name) VALUES (?)', [name]);
+		const [result] = await connection.query('INSERT INTO users (user_name, user_email, user_pass) VALUES (?, ?, ?)', [name, email, pass]);
 		return result;
 	} catch (e) {
 		console.log(e);
