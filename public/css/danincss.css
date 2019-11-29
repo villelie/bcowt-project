@@ -8,17 +8,20 @@ img {
 width: 100%;
 }
 
-p.imagetext {
-	text-align: center;
-}
+
 .likecount {
 	text-align: center;
 }
 
-.imgbox {
-	box-shadow: 1px 1px 8px black;
-	width: 100%;
-	
+
+div.imgbox {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+div.container {
+  padding: 10px;
 }
 
 button.like{
