@@ -1,6 +1,6 @@
 # bcowt-project
 Basic Concepts of Web Technology - Project
-![Danin koodi](https://i.imgur.com/WftKGyG.jpg)
+![Danin koodi](https://i.imgur.com/4kyBaWv.jpg)
 ### Commands to do before using on nodeserver
 ```
 npm i
