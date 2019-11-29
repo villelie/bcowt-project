@@ -11,18 +11,30 @@
 			width: 200px;
 			background-color: #DFD;
 		}
+		a {
+			padding: 20px;
+			margin: 50px;
+		}
 	</style>
 </head>
 <body>
 <div>
-<h1>This is index.html</h1>
-<p>Lorem ipsum ja dolorosa</p>
+	<h1>This is index.html</h1>
+	<p>Lorem ipsum ja dolorosa</p>
+	<hr>
+	<h2>Register & Login</h2>
+	<a href="./register">Register</a>
+	<form action="./userlogin" method="post">
+		<input type="text" name="login_username" placeholder="Enter name">
+		<input type="password" name="login_userpass" placeholder="Enter password">
+		<input type="submit" value="Login">
+	</form>
 	<hr>
 	<h2>Get all</h2>
-	<a href="./testdbs">Get all</a>
+	<a href="./usergetall">Get all</a>
 	<hr>
 	<h2>Search</h2>
-	<form action="./testdb" method="get">
+	<form action="./usersearch" method="get">
 		<input type="text" name="search_username" placeholder="Enter name">
 		<input type="submit" value="Search">
 	</form>
