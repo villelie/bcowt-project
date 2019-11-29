@@ -25,7 +25,7 @@ if (process.env.SERVER === 'server') {
 
 app.use(require('express-session')(sesOptions));
 
-passport.use(new localStrategy({usernameField: 'username', passwordField: 'passwd'}, (username, password, done) => {
+passport.use(new localStrategy((username, password, done) => {
 	if(username !== 'villa') {
 		console.log('wrong user');
 		return done(null, false);

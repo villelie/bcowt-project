@@ -1,5 +1,4 @@
-# bcowt-project
-Basic Concepts of Web Technology - Project
+# Basic Concepts of Web Technology - Project
 ![Danin koodi](https://i.imgur.com/4kyBaWv.jpg)
 ### Commands to do before using on nodeserver
 ```
