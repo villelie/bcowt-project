@@ -4,26 +4,32 @@ const express = require('express');
 const dbUsers = require('./models/bcowt-users');
 const dbPics = require('./models/bcowt-pics');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const app = express();
-
 const httpPort = 3033;
 const httpsPort = 3000;
+
+var sesOptions = {
+	secret: 'whatisthissupposedtobe?',
+	resave: true,
+	saveUninitialized: true,
+	cookie: {maxAge: 60000, secure: false}
+}
+if (process.env.SERVER === 'server') {
+	app.set('trust proxy', 1);
+	sesOptions.cookie.secure = true;
+	console.log('Using secure cookie');
+} else console.log('Using unsecure cookie');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
-app.use(require('express-session')({
-	secret: 'cat',
-	resave: true,
-	saveUninitialized: true
-}));
+app.use(require('express-session')(sesOptions));
 
-passport.use(new LocalStrategy((username, password, done) => {
+passport.use(new localStrategy((username, done) => {
 	console.log('login', username);
-	// $2a$12$yxtfBXmWiB.EUTddHYiaaOS1kwAIqh7h5qDd8mwbJ346xcd1ZKTuW
-    if (username !== 'tester' || !bcrypt.compareSync(password, '$2a$12$yxtfBXmWiB.EUTddHYiaaOS1kwAIqh7h5qDd8mwbJ346xcd1ZKTuW')) {
+    if (username !== 'villa') {
 		console.log('login', 'wrong username or password');
 		return done(null, false);
     }
@@ -41,23 +47,16 @@ passport.deserializeUser((user, done) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-	res.redirect('/');
-});
-
-
 if (process.env.SERVER === 'local') {
-	console.log('Server running, using /secure/localhost.js' );
 	require('./secure/localhost')(app);
 } else {
-	console.log('Server running, using /secure/server.js');
 	require('./secure/server')(app);
 	app.listen(8088, () => {
 		console.log('Started');
 	});
 }
 
-app.get('/userget', async (req, res) => {
+app.get('/usergetall', async (req, res) => {
 	try {
 		res.json(await dbUsers.getAll());
 	} catch (e) {
@@ -71,7 +70,7 @@ app.get('/usersearch', async (req, res) => {
 	try {
 		res.json(await dbUsers.search(req.query.search_username));
 	} catch(e) {
-		res.send(`db error`);
+		res.send('db error :(');
 	}
 });
 
@@ -80,7 +79,6 @@ app.post('/useradd', async (req, res) => {
 	try {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
-		console.log('NEVER DO THAT', hash);
 		res.json(await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash));
 	} catch (e) {
 		console.log(e);
@@ -88,15 +86,17 @@ app.post('/useradd', async (req, res) => {
 	}
 });
 
+app.post('/userlogin', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+	console.log('trying to login');
+	res.redirect('/');
+});
+
 app.get('/', (req, res) => {
-	if(req.secure) {
-		console.log('is user in req', req.user);
-		res.sendFile('./public/main.html', {root: __dirname});
-	} else {
-		res.send('Hello form my Node server unsecure');
-	}
+	console.log('is user in req', req.user);
+	res.sendFile('./public/main.html', {root: __dirname});
 });
 
 app.get('/register', (req, res) => {
+	console.log('is user in req', req.user);
 	res.sendFile('./public/register.html', {root: __dirname});
 });
