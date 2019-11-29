@@ -15,6 +15,12 @@ p.imagetext {
 	text-align: center;
 }
 
+.imgbox {
+	box-shadow: 1px 1px 8px black;
+	width: 100%;
+	
+}
+
 button.like{
     line-heigth: 50px;
     border-radius: 70%;
