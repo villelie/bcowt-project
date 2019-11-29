@@ -54,7 +54,7 @@ if (process.env.SERVER === 'local') {
 	});
 }
 
-app.post('/userlogin', passport.authenticate('local', {failureRedirect: '/userlogin'}), (req, res) => {
+app.post('/userlogin', passport.authenticate('local', {failureRedirect: '/fail'}), (req, res) => {
 	console.log('trying to login');
 	res.redirect('/');
 });
@@ -91,6 +91,11 @@ app.get('/', (req, res) => {
 	console.log('is user in req', req.user);
 	res.sendFile('./public/main.html', {root: __dirname});
 });
+
+app.get('/fail', (req, res) => {
+	res.send('failed to login');
+});
+
 
 app.get('/register', (req, res) => {
 	console.log('is user in req', req.user);
