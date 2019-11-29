@@ -1,15 +1,15 @@
 'use strict';
 
 const express = require('express');
-const dbUsers = require('./models/bcowt-users')
-const dbPics = require('./models/bcowt-pics')
+const dbUsers = require('./models/bcowt-users');
+const dbPics = require('./models/bcowt-pics');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const app = express();
 
 const httpPort = 3033;
-const httpsPort = 8088;
+const httpsPort = 3000;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
@@ -52,7 +52,7 @@ if (process.env.SERVER === 'local') {
 } else {
 	console.log('Server running, using /secure/server.js');
 	require('./secure/server')(app);
-	app.listen(httpPort, () => {
+	app.listen(8088, () => {
 		console.log('Started');
 	});
 }
