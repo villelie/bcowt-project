@@ -1,6 +1,6 @@
 'use strict';
 
-const connection = require('./db');
+const connection = require('../database/db.js');
 
 exports.getAll = async () => {
 	try {
@@ -33,3 +33,4 @@ exports.insert = async (name, email, pass) => {
 		throw('db error :(');
 	}
 };
+
