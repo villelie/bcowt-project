@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>static public test</title>
+	<title>testing only</title>
 	<style>
 		div {
 			margin: auto;
@@ -23,21 +23,30 @@
 	<p>Lorem ipsum ja dolorosa</p>
 	<hr>
 	<h2>Register & Login</h2>
+<<<<<<< HEAD
 	<a href="../public/register.html">Register</a>
 	<form action="./userlogin" method="post">
 		<input type="text" name="username" placeholder="Enter name">
 		<input type="password" name="password" placeholder="Enter password">
 		<input type="submit" value="Login">
 	</form>
+=======
+	<a href="./register">Register</a>
+		<form action="./userlogin?username=villa" method="post">
+			<input type="text" name="username" placeholder="Enter name">
+			<input type="password" name="password" placeholder="Enter password">
+			<input type="submit" value="Login">
+		</form>
+>>>>>>> 16f452c912cc37b76ea1a923ae4594b30cb312f9
 	<hr>
 	<h2>Get all</h2>
 	<a href="./usergetall">Get all</a>
 	<hr>
 	<h2>Search</h2>
-	<form action="./usersearch" method="get">
-		<input type="text" name="search_username" placeholder="Enter name">
-		<input type="submit" value="Search">
-	</form>
+		<form action="./usersearch" method="get">
+			<input type="text" name="search_username" placeholder="Enter name">
+			<input type="submit" value="Search">
+		</form>
 </div>
 </body>
 </html>
