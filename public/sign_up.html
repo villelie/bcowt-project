@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" type="text/css" href="css/sign_up.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+            <div id="left-card">
+            </div>
+            <div id="right-card">
+                <div class="tabContainer">
+                    <div class="buttonContainer">
+                        <button  onclick="showPanel(0,'black')">Register</button>
+                        <button onclick="showPanel(1,'black')">Sign in</button>
+                    </div>
+                    <div class="tabPanel">
+                        <h2>Registration info</h2>
+                        <form id="register_form " action="./useradd" method="post">
+                            <label>
+                                <input class="input_box" type="text" name="register_username" placeholder="Enter name">
+                            </label>
+                            <label>
+                                <input class="input_box" type="email" name="register_useremail" placeholder="Enter email">
+                            </label>
+                            <label>
+                                <input class="input_box" type="password" name="register_userpass" placeholder="Enter password">
+                            </label>
+                            <input class="button" type="submit" value="register">
+                        </form>
+                    </div>
+                    <div class="tabPanel">
+                        <h2>Sign in</h2>
+                        <form id= "login_form" action="./userlogin" method="post">
+                            <label>
+                                <input class="input_box" type="text" name="username" placeholder="Enter name">
+                            </label>
+                            <label>
+                                <input class="input_box" type="password" name="password" placeholder="Enter password">
+                            </label>
+                            <input class="button" type="submit" value="sign in">
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        let tabButton=document.querySelectorAll(".tabContainer .buttonContainer button");
+        let tabPanel=document.querySelectorAll(".tabContainer .tabPanel");
+        function showPanel(panelIndex, colorCode){
+            tabButton.forEach(function (node) {
+               node.style.background="";
+               node.style.color="";
+            });
+            tabButton[panelIndex].style.backgroundColor=colorCode;
+            tabButton[panelIndex].style.color="white";
+            tabPanel.forEach(function (node) {
+                node.style.display="none";
+            });
+            tabPanel[panelIndex].style.display="block";
+            tabPanel[panelIndex].style.backgroundColor=colorCode;
+        }
+        showPanel(0,'black');
+    </script>
+</body>
+</html>

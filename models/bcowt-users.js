@@ -34,3 +34,10 @@ exports.insert = async (name, email, pass) => {
 	}
 };
 
+
+
+
+
+
+
+
