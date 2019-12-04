@@ -8,13 +8,10 @@
 <body>
 
 <h3>Upload a picture</h3>
-      <form action="/picadd"
-            method="post"
-            enctype="multipart/form-data"
-            id="addCatForm">
-        <input type="text" name="title" placeholder="Title" required>
-		<input type="text" name="desc" placeholder="Description" required>
-        <input type="file" name="pic" placeholder="Choose file">
+      <form action="./picadd" method="post">
+        <input type="text" name="pic_title" placeholder="Title" required>
+		<input type="text" name="pic_desc" placeholder="Description" required>
+        <input type="file" name="pic_file" placeholder="Choose file">
         <button type="submit">Upload</button>
       </form>
 

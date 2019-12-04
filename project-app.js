@@ -12,7 +12,7 @@ const app = express();
 const httpPort = 3033;
 
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('uploads');
+app.use(express.static('uploads'));
 
 const sesOptions = {
 	secret: process.env.SESSION_SECRET,
@@ -86,7 +86,6 @@ app.post('/useradd', async (req, res) => {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
 		await res.json(await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash));
-		console.log(hash);
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -103,7 +102,7 @@ app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/fail'})
 app.post('/picadd', async (req, res) => {
 	console.log(req.body);
 	try {
-		await res.json(await dbPics.insert(req.body.title, req.body.desc, req.body.pic));
+		await res.json(await dbPics.insert(req.body.pic_title, req.body.pic_desc, req.body.pic_file));
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -113,7 +112,6 @@ app.post('/picadd', async (req, res) => {
 app.get('/', (req, res) => {
 	console.log('is user in req', req.user);
 	res.sendFile('./public/sign_up.html', {root: __dirname});
-	dbUsers.getPass('ville')
 });
 
 app.get('/fail', (req, res) => {
