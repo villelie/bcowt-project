@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/villelie/bcowt-project#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -32,7 +31,8 @@
     "mysql2": "^2.0.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sharp": "^0.23.3"
   },
   "devDependencies": {
     "connect-flash": "^0.1.1"
