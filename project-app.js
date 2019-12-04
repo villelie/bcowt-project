@@ -12,6 +12,7 @@ const app = express();
 const httpPort = 3033;
 
 app.use(express.urlencoded({extended: true}));
+app.use(express.static('uploads');
 
 const sesOptions = {
 	secret: process.env.SESSION_SECRET,
