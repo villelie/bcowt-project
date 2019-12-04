@@ -25,19 +25,23 @@ exports.search = async (name) => {
 };
 
 exports.insert = async (name, email, pass) => {
+	if (name && email && pass) {
+		try {
+			const [results] = await connection.query('INSERT INTO users (user_name, user_email, user_pass) VALUES (?, ?, ?)', [name, email, pass]);
+			return results;
+		} catch (e) {
+			console.log(e);
+			throw('db error :(');
+		}
+	}
+};
+
+exports.getPass = async (name) => {
 	try {
-		const [result] = await connection.query('INSERT INTO users (user_name, user_email, user_pass) VALUES (?, ?, ?)', [name, email, pass]);
-		return result;
+		const [results] = await connection.query('SELECT user_pass FROM users WHERE user_name = ?', [name]);
+		return results;
 	} catch (e) {
 		console.log(e);
 		throw('db error :(');
 	}
 };
-
-
-
-
-
-
-
-

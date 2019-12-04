@@ -24,10 +24,10 @@ exports.search = async (txt) => {
 	}
 };
 
-exports.insert = async (title, description) => {
+exports.insert = async (title, description, file) => {
 	try {
-		const [result] = await connection.query('INSERT INTO pics (pic_title, pic_desc) VALUES (?, ?)', [title, description]);
-		return result;
+		const [results] = await connection.query('INSERT INTO pics (pic_title, pic_desc, pic_file) VALUES (?, ?, ?)', [title, description, file]);
+		return results;
 	} catch (e) {
 		console.log(e);
 		throw('db error :(');

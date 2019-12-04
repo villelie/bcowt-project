@@ -22,11 +22,10 @@ const sesOptions = {
 
 app.use(require('express-session')(sesOptions));
 
-passport.use(new LocalStrategy((username, password ,done) => {
-    console.log('login', username);
-    //normally usermodel.findUser SELECT * from wop_user where username = ?, [username]
-
-    if(username !== dbUsers.search(username) || !bcrypt.compareSync(password, dbUsers.findPass(password))) {
+passport.use(new LocalStrategy(async (username, password ,done) => {
+    let hash = bcrypt.hashSync('asd', 10);
+	console.log(hash);
+    if(username !== dbUsers.search(username) ) {
         console.log('login', 'wrong username or password');
         return done(null, false);
     }
@@ -86,6 +85,7 @@ app.post('/useradd', async (req, res) => {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
 		await res.json(await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash));
+		console.log(hash);
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -98,9 +98,21 @@ app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/fail'})
 	res.redirect('/');
 });
 
+
+app.post('/picadd', async (req, res) => {
+	console.log(req.body);
+	try {
+		await res.json(await dbPic.insert(req.body.title, req.body.desc, req.body.pic));
+	} catch (e) {
+		console.log(e);
+		res.send('db error :(');
+	}
+});
+
 app.get('/', (req, res) => {
 	console.log('is user in req', req.user);
 	res.sendFile('./public/sign_up.html', {root: __dirname});
+	dbUsers.getPass('ville')
 });
 
 app.get('/fail', (req, res) => {
