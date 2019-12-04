@@ -7,6 +7,11 @@
 </head>
 <body>
 
+ <h1>List of cats</h1>
+  <ul>
+    <!-- js creates list here -->
+  </ul>
+
 <h3>Upload a picture</h3>
       <form action="./picadd" method="post">
         <input type="text" name="pic_title" placeholder="Title" required>
@@ -15,6 +20,23 @@
         <button type="submit">Upload</button>
       </form>
 
+<br>
+<br>
+<br>
+<br>
+<div class="form-wrapper">
+      <h3>Try another way to upload</h3>
+      <form action="./picadd"
+            method="post"
+            class="light-border"
+            enctype="multipart/form-data"
+            id="addPicForm">
+        <input type="text" name="pic_title" placeholder="Title" required>
+		<input type="text" name="pic_desc" placeholder="Description" required>
+        <input type="file" name="pic_file" placeholder="Choose file">
+        <button type="submit">Upload</button>
+      </form>
+    </div>
 <br>
 <br>
 <br>
@@ -29,11 +51,9 @@
 	<p id="result" class="likecount">So many likes</p>
     <div>
         <button onclick="clickCounter()" type="button" class="like">👍</button>        
-        <button onclick="clickCounter2()" type="button" class="dislike">👎</button>
         <script src="js/Counter.js"></script>
-		<script src="js/Counterminus.js"></script>
     </div>
 </div>
-
+<script src="./js/main.js"></script>
 </body>
 </html>

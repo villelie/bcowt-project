@@ -107,6 +107,8 @@ app.post('/picadd', async (req, res) => {
 		res.send('db error :(');
 	}
 });
+const picRoute = require('./models/picRouter');
+app.use('/picadd', picRoute);
 
 app.get('/', (req, res) => {
 	console.log('Current logged in user:', req.user);
