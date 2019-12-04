@@ -118,7 +118,7 @@ app.get('/register', (req, res) => {
 	res.sendFile('./public/register.html', {root: __dirname});
 });
 
-app.get('/notmapix', (req, res) => {
-	console.log('Current logged in user:', req.user);
-	res.sendFile('./public/notmapix/header.html', {root: __dirname});
+
+app.get('/template', (req, res) => {
+	res.sendFile('./public/template.html', {root: __dirname});
 });
