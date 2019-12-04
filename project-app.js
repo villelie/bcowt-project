@@ -94,7 +94,7 @@ app.post('/useradd', async (req, res) => {
 
 app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}),
     (req, res) => {
-	res.redirect('/');
+	res.send('logged in');
 });
 
 
@@ -116,4 +116,9 @@ app.get('/', (req, res) => {
 app.get('/register', (req, res) => {
 	console.log('Current logged in user:', req.user);
 	res.sendFile('./public/register.html', {root: __dirname});
+});
+
+app.get('/notmapix', (req, res) => {
+	console.log('Current logged in user:', req.user);
+	res.sendFile('./public/notmapix/header.html', {root: __dirname});
 });
