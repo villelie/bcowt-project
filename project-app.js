@@ -102,7 +102,7 @@ app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/fail'})
 app.post('/picadd', async (req, res) => {
 	console.log(req.body);
 	try {
-		await res.json(await dbPic.insert(req.body.title, req.body.desc, req.body.pic));
+		await res.json(await dbPics.insert(req.body.title, req.body.desc, req.body.pic));
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
