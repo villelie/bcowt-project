@@ -8,6 +8,7 @@ const dbPics = require('./models/bcowt-pics');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
+
 const app = express();
 const httpPort = 3033;
 
@@ -24,10 +25,9 @@ const sesOptions = {
 app.use(require('express-session')(sesOptions));
 
 passport.use(new LocalStrategy(async (username, password ,done) => {
-    let hash = bcrypt.hashSync('asd', 10);
-	console.log(hash);
-    if(username !== dbUsers.search(username) ) {
-        console.log('login', 'wrong username or password');
+    // if(username !== dbUsers.getName(username) || !bcrypt.compareSync(password, dbUsers.getPass(password))) { 
+	if ((username !== await dbUsers.getName(username)) || !(await bcrypt.compare(password, await dbUsers.getPass(username)))) {
+		console.log('Login', 'Wrong username or password!');
         return done(null, false);
     }
     return done(null, {username: username});
@@ -92,9 +92,8 @@ app.post('/useradd', async (req, res) => {
 	}
 });
 
-app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/fail'}),
+app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}),
     (req, res) => {
-	console.log('trying to login');
 	res.redirect('/');
 });
 
@@ -110,15 +109,11 @@ app.post('/picadd', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-	console.log('is user in req', req.user);
+	console.log('Current logged in user:', req.user);
 	res.sendFile('./public/sign_up.html', {root: __dirname});
 });
 
-app.get('/fail', (req, res) => {
-	res.send('failed to login');
-});
-
 app.get('/register', (req, res) => {
-	console.log('is user in req', req.user);
+	console.log('Current logged in user:', req.user);
 	res.sendFile('./public/register.html', {root: __dirname});
 });

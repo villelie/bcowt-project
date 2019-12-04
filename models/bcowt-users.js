@@ -36,10 +36,20 @@ exports.insert = async (name, email, pass) => {
 	}
 };
 
+exports.getName = async (name) => {
+	try {
+		const [results] = await connection.query('SELECT user_name FROM users WHERE user_name = ?', [name]);
+		return results[0].user_name;
+	} catch(e) {
+		console.log(e);
+		throw 'db error :(';
+	}
+};
+
 exports.getPass = async (name) => {
 	try {
 		const [results] = await connection.query('SELECT user_pass FROM users WHERE user_name = ?', [name]);
-		return results;
+		return results[0].user_pass;
 	} catch (e) {
 		console.log(e);
 		throw('db error :(');
