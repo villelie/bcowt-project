@@ -25,12 +25,15 @@ const sesOptions = {
 app.use(require('express-session')(sesOptions));
 
 passport.use(new LocalStrategy(async (username, password ,done) => {
-    // if(username !== dbUsers.getName(username) || !bcrypt.compareSync(password, dbUsers.getPass(password))) { 
-	if ((username !== await dbUsers.getName(username)) || !(await bcrypt.compare(password, await dbUsers.getPass(username)))) {
-		console.log('Login', 'Wrong username or password!');
-        return done(null, false);
-    }
-    return done(null, {username: username});
+    		const userpass  = await dbUsers.getPass(username);
+		const pwdCheck = await bcrypt.compare(password, userpass);
+		console.log('check user login', userpass, pwdCheck);
+	if(userpass !== "no pass found" && pwdCheck) {
+		return done(null, {username: username});
+	} else {
+		console.log('login', 'wrong username or password');
+		return done(null, false);
+	}
 }));
 
 if (process.env.SERVER === 'server') {
