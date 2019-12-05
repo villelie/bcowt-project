@@ -1,1 +1,244 @@
 /* styles.css */
+
+
+/*VARIABLES (colours) for example: color: var(--name);*/
+:root {
+	--backg: #D5D4CC;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "montserrat",sans-serif;
+  font-size: 20px;
+}
+.header{
+  height: 100px;
+  background: #30464f;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin: 0;
+}
+.logo{
+  line-height: 100px;
+  float: left;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.menu{
+  float: right;
+  line-height: 100px;
+}
+.menu a{
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 10px;
+  transition: 0.4s;
+}
+.show-menu-btn,.hide-menu-btn{
+  transition: 0.4s;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+}
+.show-menu-btn{
+  float: right;
+}
+.show-menu-btn i{
+  line-height: 100px;
+}
+.menu a:hover,
+.show-menu-btn:hover,
+.hide-menu-btn:hover{
+  color: #62929e;
+}
+
+#chk{
+  position: absolute;
+  visibility: hidden;
+  z-index: -1111;
+}
+
+.content{
+  padding: 0 20px;
+}
+.content img{
+  width: 100%;
+  max-width: 700px;
+  margin: 20px 0;
+}
+.content p{
+  text-align: justify;
+}
+
+main {
+	
+	background-color: var(--backg);
+	
+}
+
+hr {
+	margin: 10px 20px;
+	/*border: solid 1px var(--vaaleaKoroste);*/
+	border-radius: 5px;
+}
+
+ul, span {
+	font-size:30px;
+	cursor:pointer;
+}
+
+	
+/*-------------------------------------------------------------------------------*/
+
+.pic:first-of-type {
+	margin-top: 100px;
+}
+
+.pic {
+	
+	width: 35%;
+	margin: auto;
+	padding: 20px
+	
+}
+
+img {
+	
+width: 100%;
+}
+
+
+div.imgbox {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: inline-block;
+  background-color: white;
+}
+
+div.container {
+  padding: 50px;
+  background-color: white;
+}
+
+
+button.like{
+
+	float: right;
+}
+
+footer {
+	
+	background: #30464f;
+	color: #fff;
+	height: 100px;
+	width: 100%;
+}
+
+footer, i {
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100px; 
+}
+
+i:hover,
+.show-menu-btn:hover,
+.hide-menu-btn:hover + .upload{
+  color: #62929e;
+}
+
+.uploadfields {
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+}	
+
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.5);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0.8;
+}
+
+.overlay form {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #212828;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: white;
+}
+
+.overlay, h1 {
+	
+	font-size: 1000px;
+	color: #d5d4cc;
+}
+	
+
+
+@media screen and (max-width:800px) {
+	
+  .pic {
+	
+	width: 60%;
+	margin: auto;
+	padding: 20px
+	
+}
+  .show-menu-btn,.hide-menu-btn{
+    display: block;
+  }
+  .menu{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #30464f;
+    right: -100%;
+    top: 0;
+    text-align: center;
+    padding: 80px 0;
+    line-height: normal;
+    transition: 0.5s;
+  }
+  .menu a{
+    display: block;
+    padding: 20px;
+  }
+  .hide-menu-btn{
+    position: absolute;
+    top: 40px;
+    right: 40px;
+  }
+  #chk:checked ~ .menu{
+    right: 0;
+  }
+}
