@@ -92,9 +92,15 @@ app.post('/useradd', async (req, res) => {
 	}
 });
 
-app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}),
-    (req, res) => {
+app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}), (req, res) => {
+	console.log('At /userlogin - Current logged in user:', req.user);
 	res.send('logged in');
+});
+
+app.get('/userlogout', async (req, res) => {
+	req.logout();
+	console.log('At /userlogout - Current logged in user:', req.user);
+	res.send('logged out');
 });
 
 
