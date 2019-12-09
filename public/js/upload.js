@@ -9,7 +9,7 @@ const createPicCards = (pics) => {
   pics.forEach((pic) => {
     // create li with DOM methods
     const img = document.createElement('img');
-    img.src = url + '/uploads/' + pic.pic_file;
+    img.src = url + '/thumbnails/' + pic.pic_file;
     img.alt = pic.pic_title;
 
     const figure = document.createElement('figure').appendChild(img);

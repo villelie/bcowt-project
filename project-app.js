@@ -4,6 +4,7 @@ const express = require('express');
 // database
 const dbUsers = require('./models/bcowt-users');
 const dbPics = require('./models/bcowt-pics');
+const resize = require('./models/resize');
 // passport and authentication
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -14,8 +15,6 @@ const app = express();
 const httpPort = 3033;
 
 app.use(express.urlencoded({extended: true}));
-app.use('/uploads', express.static('uploads'));
-app.use('/thumbnails', express.static('thumbnails'));
 
 const sesOptions = {
 	secret: process.env.SESSION_SECRET,
@@ -66,6 +65,8 @@ if (process.env.SERVER === 'local') {
 }
 
 app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 app.post('/useradd', async (req, res) => {
 	try {
@@ -92,8 +93,9 @@ app.get('/userlogout', async (req, res) => {
 
 
 app.post('/picadd', upload.single('uploadpic'), async (req, res) => {
-	console.log(req.file);
+	console.log(req.file.path, req.file.filename);
 	try {
+		await resize.makeThumbnail(req.file.path, {width:160, height:160}, 'thumbnails/' + req.file.filename);
 		await dbPics.insert(req.body.pic_title, req.body.pic_desc, req.file.filename);
 		res.redirect('/template');
 	} catch (e) {
