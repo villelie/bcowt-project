@@ -2,7 +2,7 @@
 
 document.querySelectorAll('.like').forEach(function(e) {
   e.addEventListener('click', function() {
-    this.style.opacity = "1.0";
+    this.style.backgroundColor = "red";
   })
 });
 
