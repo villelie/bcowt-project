@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="css/danincss.css">
 </head>
 <body>
 
@@ -13,38 +12,12 @@
   </ul>
 
 <h3>Upload a picture</h3>
-      <form action="./picadd" method="post" enctype="multipart/form-data">
-        <input type="text" name="pic_title" placeholder="Title" required>
-		<input type="text" name="pic_desc" placeholder="Description" required>
-        <input type="file" name="uploadpic" placeholder="Choose file">
-        <button type="submit">Upload</button>
-      </form>
-
-<br>
-<br>
-<br>
-<br>
-<div class="form-wrapper">
-      <h3>Try another way to upload</h3>
-      
-    </div>
-<br>
-<br>
-<br>
-<br>
-
-<div class="pic">
-	<div class="imgbox">
-    <img src="https://placekitten.com/800/800" alt="pic">
-	<div class="container"><p>Image text</p>
-  </div>
-	</div>
-	<p id="result" class="likecount">So many likes</p>
-    <div>
-        <button onclick="clickCounter()" type="button" class="like">👍</button>        
-        <script src="js/Counter.js"></script>
-    </div>
-</div>
-<script src="./js/main.js"></script>
+<form action="./picadd" method="post" enctype="multipart/form-data">
+<input type="text" name="pic_title" placeholder="Title" required>
+<input type="text" name="pic_desc" placeholder="Description" required>
+<input type="file" name="uploadpic" placeholder="Choose file">
+<button type="submit">Upload</button>
+</form>
+<script src="./js/upload.js"></script>
 </body>
 </html>

@@ -1,42 +1,32 @@
-const url = https://localhost:8088
+'use strict';
+const url = 'https://localhost:8088'
+
+const ul = document.querySelector('ul');
+
 const createPicCards = (pics) => {
   // clear ul
   ul.innerHTML = '';
   pics.forEach((pic) => {
     // create li with DOM methods
     const img = document.createElement('img');
-    img.src = url + '/' + pic.filename;
-    img.alt = pic.name;
-    img.classList.add('resp');
+    img.src = url + '/uploads/' + pic.pic_file;
+    img.alt = pic.pic_title;
 
     const figure = document.createElement('figure').appendChild(img);
-
     const h2 = document.createElement('h2');
-    h2.innerHTML = pic.name;
-
-    const p1 = document.createElement('p');
-    p1.innerHTML = `Title: ${pic.age}`;
-
-    const p2 = document.createElement('p');
-    p2.innerHTML = `Desc: ${pic.weight}kg`;
-
-    const li = document.createElement('li');
-    li.classList.add('light-border');
-
+    h2.innerHTML = pic.pic_title;
+	const li = document.createElement('li');
+	
     li.appendChild(h2);
     li.appendChild(figure);
-    li.appendChild(p1);
-    li.appendChild(p2);
-    li.appendChild(modButton);
-    li.appendChild(delButton);
     ul.appendChild(li);
   });
 };
 
 // AJAX call
-const getpic = async () => {
+const getPic = async () => {
   try {
-    const response = await fetch(url + '/pic');
+    const response = await fetch(url + '/picget');
     const pics = await response.json();
     createPicCards(pics);
   }
@@ -44,4 +34,4 @@ const getpic = async () => {
     console.log(e.message);
   }
 };
-getpic();
+getPic();

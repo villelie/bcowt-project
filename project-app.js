@@ -14,7 +14,8 @@ const app = express();
 const httpPort = 3033;
 
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 const sesOptions = {
 	secret: process.env.SESSION_SECRET,
@@ -67,7 +68,6 @@ if (process.env.SERVER === 'local') {
 app.use(express.static('public'));
 
 app.post('/useradd', async (req, res) => {
-	console.log(req.body);
 	try {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
@@ -96,6 +96,15 @@ app.post('/picadd', upload.single('uploadpic'), async (req, res) => {
 	try {
 		await dbPics.insert(req.body.pic_title, req.body.pic_desc, req.file.filename);
 		res.redirect('/template');
+	} catch (e) {
+		console.log(e);
+		res.send('db error :(');
+	}
+});
+
+app.get('/picget', async (req, res) => {
+	try {
+		res.json(await dbPics.getAll());
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
