@@ -8,7 +8,8 @@ const dbPics = require('./models/bcowt-pics');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
-
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 const app = express();
 const httpPort = 3033;
 
@@ -65,24 +66,6 @@ if (process.env.SERVER === 'local') {
 
 app.use(express.static('public'));
 
-app.get('/usergetall', async (req, res) => {
-	try {
-		res.json(await dbUsers.getAll());
-	} catch (e) {
-		console.log(e);
-		res.send('db error :(');
-	}
-});
-
-app.get('/usersearch', async (req, res) => {
-	console.log(req.query);
-	try {
-		res.json(await dbUsers.search(req.query.search_username));
-	} catch(e) {
-		res.send('db error :(');
-	}
-});
-
 app.post('/useradd', async (req, res) => {
 	console.log(req.body);
 	try {
@@ -93,6 +76,7 @@ app.post('/useradd', async (req, res) => {
 		console.log(e);
 		res.send('db error :(');
 	}
+	res.redirect('/');
 });
 
 app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}), (req, res) => {
@@ -107,17 +91,16 @@ app.get('/userlogout', async (req, res) => {
 });
 
 
-app.post('/picadd', async (req, res) => {
-	console.log(req.body);
+app.post('/picadd', upload.single('uploadpic'), async (req, res) => {
+	console.log(req.file);
 	try {
-		await res.json(await dbPics.insert(req.body.pic_title, req.body.pic_desc, req.body.pic_file));
+		await dbPics.insert(req.body.pic_title, req.body.pic_desc, req.file.filename);
+		res.redirect('/template');
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
 	}
 });
-const picRoute = require('./models/picRouter');
-app.use('/picadd', picRoute);
 
 app.get('/', (req, res) => {
 	console.log('Current logged in user:', req.user);

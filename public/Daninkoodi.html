@@ -13,10 +13,10 @@
   </ul>
 
 <h3>Upload a picture</h3>
-      <form action="./picadd" method="post">
+      <form action="./picadd" method="post" enctype="multipart/form-data">
         <input type="text" name="pic_title" placeholder="Title" required>
 		<input type="text" name="pic_desc" placeholder="Description" required>
-        <input type="file" name="pic_file" placeholder="Choose file">
+        <input type="file" name="uploadpic" placeholder="Choose file">
         <button type="submit">Upload</button>
       </form>
 
@@ -26,16 +26,7 @@
 <br>
 <div class="form-wrapper">
       <h3>Try another way to upload</h3>
-      <form action="./picadd"
-            method="post"
-            class="light-border"
-            enctype="multipart/form-data"
-            id="addPicForm">
-        <input type="text" name="pic_title" placeholder="Title" required>
-		<input type="text" name="pic_desc" placeholder="Description" required>
-        <input type="file" name="pic_file" placeholder="Choose file">
-        <button type="submit">Upload</button>
-      </form>
+      
     </div>
 <br>
 <br>
