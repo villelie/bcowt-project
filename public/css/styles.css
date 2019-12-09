@@ -33,7 +33,6 @@
 .menu{
   float: right;
   line-height: 100px;
-  z-index: 10;
 }
 .menu a{
   color: #fff;
@@ -201,9 +200,10 @@ i:hover,
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0, 0.7);
+  background:: #30464f;
+  background-color: #30464f;
   overflow-y: hidden;
+  opacity: 0.9;
   transition: 0.5s;
 }
 
@@ -218,7 +218,6 @@ i:hover,
 
 .overlay form {
   padding: 8px;
-  text-decoration: none;
   font-size: 36px;
   color: #212828;
   display: block;
