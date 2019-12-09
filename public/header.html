@@ -7,10 +7,10 @@
 
 					<ul class="menu">
 						<i class="fa fa-upload" onclick="openNav()"></i>
-						<a href="#">Home</a>
-						<a href="#">Sign in</a>
-						<a href="#">Sign up</a>
-						<a href="#">My Profile</a>
+						<a href="./">Home</a>
+						<a href="./login">Sign in</a>
+						<a href="./login">Sign up</a>
+						<a href="./getown">My Profile</a>
 						<label for="chk" class="hide-menu-btn">
 						<i class="fas fa-times"></i>
 						</label>
@@ -23,11 +23,7 @@
   
 		<div class="overlay-content"
 			<h1>Upload your pictures here!</h1>
-				<form action="./picadd"
-				method="post"
-				class="light-border"
-				enctype="multipart/form-data"
-				id="addPicForm">
+				<form action="./picadd" method="post" class="light-border" enctype="multipart/form-data" id="addPicForm">
 					<input type="text" name="pic_title" placeholder="Title" required>
 					<input type="text" name="pic_desc" placeholder="Description" required>
 					<input type="file" name="pic_file" placeholder="Choose file">

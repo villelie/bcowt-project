@@ -4,7 +4,17 @@ const connection = require('../database/db');
 
 exports.getAll = async () => {
 	try {
-		const [results, fields] = await connection.query('SELECT * FROM pics');
+		const [results, fields] = await connection.query('SELECT pics.*, users.user_name as owner FROM pics JOIN users ON users.user_id = pics.owner_id;');
+		return results;
+	} catch (e) {
+		console.log(e);
+		throw 'db error :(';
+	}
+};
+
+exports.getOwner = async (id) => {
+	try {
+		const [results, fields] = await connection.query('SELECT * FROM pics WHERE owner_id = ?', [id]);
 		return results;
 	} catch (e) {
 		console.log(e);
@@ -22,10 +32,10 @@ exports.search = async (txt) => {
 	}
 };
 
-exports.insert = async (title, description, file) => {
-	if (title && description && file) {
+exports.insert = async (owner, title, description, file) => {
+	if (owner && title && description && file) {
 		try {
-			const [results] = await connection.query('INSERT INTO pics (pic_title, pic_desc, pic_file) VALUES (?, ?, ?)', [title, description, file]);
+			const [results] = await connection.query('INSERT INTO pics (owner_id, pic_title, pic_desc, pic_file) VALUES (?, ?, ?, ?)', [owner, title, description, file]);
 			return results;
 		} catch (e) {
 			console.log(e);

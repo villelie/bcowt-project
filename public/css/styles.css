@@ -8,83 +8,85 @@
 
 /*header css*/
 *{
-  margin: 0;
-  padding: 0;
-  font-family: 'Solway', serif;
-  font-size: 20px;
+	margin: 0;
+	padding: 0;
+	font-family: 'Solway', serif;
+	font-size: 20px;
 }
+
 .header{
-  height: 100px;
-  background: #30464f;
-  color: #fff;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  margin: 0;
+	height: 100px;
+	background: #30464f;
+	color: #fff;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	margin: 0;
 }
+
 .logo{
-  line-height: 100px;
-  float: left;
-  font-family: 'Lobster', cursive;
-  font-size: 50px;
-  padding: 0 20px;
+	line-height: 100px;
+	float: left;
+	font-family: 'Lobster', cursive;
+	font-size: 50px;
+	padding: 0 20px;
 }
 
 .menu{
-  float: right;
-  line-height: 100px;
+	float: right;
+	line-height: 100px;
 }
 .menu a{
-  color: #fff;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 0 10px;
-  transition: 0.4s;
+	color: #fff;
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 0 10px;
+	transition: 0.4s;
 }
 
 /*mobile use*/
-
 .show-menu-btn,.hide-menu-btn{
-  transition: 0.4s;
-  font-size: 30px;
-  cursor: pointer;
-  display: none;
+	transition: 0.4s;
+	font-size: 30px;
+	cursor: pointer;
+	display: none;
 }
+
 .show-menu-btn{
-  float: right;
-  padding: 20px;
+	float: right;
+	padding: 20px;
 }
+
 .show-menu-btn i{
   line-height: 100px;
 }
-.menu a:hover,
-.show-menu-btn:hover,
-.hide-menu-btn:hover{
-  color: #62929e;
+¨
+.menu a:hover, .show-menu-btn:hover, .hide-menu-btn:hover{
+	color: #62929e;
 }
 
 #chk{
-  position: absolute;
-  visibility: hidden;
-  z-index: -1111;
+	position: absolute;
+	visibility: hidden;
+	z-index: -1111;
 }
 
 .content{
-  padding: 0 20px;
+	padding: 0 20px;
 }
+
 .content img{
-  width: 100%;
-  max-width: 700px;
-  margin: 20px 0;
+	width: 100%;
+	max-width: 700px;
+	margin: 20px 0;
 }
+
 .content p{
-  text-align: justify;
+	text-align: justify;
 }
 
 main {
-	
 	background-color: var(--backg);
-	
 }
 
 hr {
@@ -98,7 +100,6 @@ ul, span {
 	cursor:pointer;
 }
 
-	
 /*-------------------------------------------------------------------------------*/
 /*image card*/
 .pic:first-of-type {
@@ -106,36 +107,32 @@ ul, span {
 }
 
 .pic {
-	
 	width: 35%;
 	margin: auto;
 	padding: 20px
-	
 }
 
 img {
-	
-width: 100%;
+	width: 100%;
 }
 
-
 div.imgbox {
-  width: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  display: inline-block;
-  background-color: white;
+	width: 100%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	display: inline-block;
+	background-color: white;
 }
 
 div.container {
-  padding: 30px;
-  background-color: white;
-  display: inline-block;
+	padding: 30px;
+	background-color: white;
+	display: inline-block;
 }
 
 div.likecontainer {
-  padding: 5px;
-  display: inline-block;
-  width: 100%;
+	padding: 5px;
+	display: inline-block;
+	width: 100%;
 }
 
 div.container p {
@@ -143,9 +140,7 @@ div.container p {
 }
 
 /* like button*/
-
 button.like{
-
 	display: inline-block;
     border-radius: 4px;
     background-color: salmon;
@@ -163,10 +158,9 @@ button.like{
 button.like:hover {
 	opacity: 1.0;
 }
-/*footer css*/
 
+/*footer css*/
 footer {
-	
 	background: #30464f;
 	color: #fff;
 	height: 100px;
@@ -179,14 +173,11 @@ footer, i {
 	line-height: 100px; 
 }
 
-i:hover,
-.show-menu-btn:hover,
-.hide-menu-btn:hover + .upload{
-  color: #62929e;
+i:hover, .show-menu-btn:hover, .hide-menu-btn:hover + .upload{
+	color: #62929e;
 }
 
 /*overlay for upload*/
-
 .uploadfields {
 	text-align: center;
 	vertical-align: middle;
@@ -194,90 +185,90 @@ i:hover,
 }	
 
 .overlay {
-  height: 0%;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background:: #30464f;
-  background-color: #30464f;
-  overflow-y: hidden;
-  opacity: 0.9;
-  transition: 0.5s;
+	height: 0%;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background:: #30464f;
+	background-color: #30464f;
+	overflow-y: hidden;
+	opacity: 0.9;
+	transition: 0.5s;
 }
 
 .overlay-content {
-  position: relative;
-  top: 40%;
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-  opacity: 0.8;
+	position: relative;
+	top: 40%;
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+	opacity: 0.8;
 }
 
 .overlay form {
-  padding: 8px;
-  font-size: 36px;
-  color: #212828;
-  display: block;
-  transition: 0.4s;
+	padding: 8px;
+	font-size: 36px;
+	color: #212828;
+	display: block;
+	transition: 0.4s;
 }
 
 .overlay .closebtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
-  color: white;
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	font-size: 60px;
+	color: white;
 }
 
 .overlay, h1 {
-	
 	font-size: 1000px;
 	color: #d5d4cc;
 }
 	
 
 /* css changes for mobile*/
-
 @media screen and (max-width:800px) {
+	.pic {
+		width: 60%;
+		margin: auto;
+		padding: 20px
+	}
 	
-  .pic {
+	.show-menu-btn,.hide-menu-btn{
+		display: block;
+	}
 	
-	width: 60%;
-	margin: auto;
-	padding: 20px
+	.menu{
+		position: fixed;
+		width: 100%;
+		height: 100vh;
+		background: #30464f;
+		right: -100%;
+		top: 0;
+		text-align: center;
+		padding: 80px 0;
+		line-height: normal;
+		transition: 0.5s;
+		opacity: 0.9;
+		z-index: 10;
+	}
 	
-}
-  .show-menu-btn,.hide-menu-btn{
-    display: block;
-  }
-  .menu{
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: #30464f;
-    right: -100%;
-    top: 0;
-    text-align: center;
-    padding: 80px 0;
-    line-height: normal;
-    transition: 0.5s;
-	opacity: 0.9;
-	z-index: 10;
-  }
-  .menu a{
-    display: block;
-    padding: 20px;
-	opacity: 1.0;
-  }
-  .hide-menu-btn{
-    position: absolute;
-    top: 40px;
-    right: 40px;
-  }
-  #chk:checked ~ .menu{
-    right: 0;
-  }
+	.menu a{
+		display: block;
+		padding: 20px;
+		opacity: 1.0;
+	}
+	
+	.hide-menu-btn{
+		position: absolute;
+		top: 40px;
+		right: 40px;
+	}
+	
+	#chk:checked ~ .menu{
+		right: 0;
+	}
 }

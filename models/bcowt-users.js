@@ -54,6 +54,24 @@ exports.getName = async (name) => {
 	}
 };
 
+exports.getId = async (name) => {
+	if (name) {
+		try {
+			const [results] = await connection.query('SELECT user_id FROM users WHERE user_name = ?', [name]);
+			if (results[0] === undefined){
+				console.log("user not found");
+			}else {
+				console.log(results[0].user_id);
+				return results[0].user_id;
+			}
+			return results[0].user_id;
+		} catch(e) {
+			console.log(e);
+			throw 'db error :(';
+		}
+	}
+};
+
 exports.getPass = async (name) => {
 	if (name) {
 		try {

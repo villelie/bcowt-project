@@ -26,10 +26,10 @@ const sesOptions = {
 app.use(require('express-session')(sesOptions));
 
 passport.use(new LocalStrategy(async (username, password ,done) => {
-    		const userpass  = await dbUsers.getPass(username);
-		const pwdCheck = await bcrypt.compare(password, userpass);
-		console.log('check user login', userpass, pwdCheck);
-	if(userpass !== "no pass found" && pwdCheck) {
+	const userpass  = await dbUsers.getPass(username);
+	const pwdCheck = await bcrypt.compare(password, userpass);
+	console.log('check user login', userpass, pwdCheck);
+	if (userpass !== "no pass found" && pwdCheck) {
 		return done(null, {username: username});
 	} else {
 		console.log('login', 'wrong username or password');
@@ -72,7 +72,7 @@ app.post('/useradd', async (req, res) => {
 	try {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
-		await res.json(await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash));
+		res.json(await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash));
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -82,22 +82,21 @@ app.post('/useradd', async (req, res) => {
 
 app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}), (req, res) => {
 	console.log('At /userlogin - Current logged in user:', req.user);
-	res.send('logged in');
+	res.redirect('/');
 });
 
 app.get('/userlogout', async (req, res) => {
 	req.logout();
 	console.log('At /userlogout - Current logged in user:', req.user);
-	res.send('logged out');
+	res.redirect('/');
 });
 
 
-app.post('/picadd', upload.single('uploadpic'), async (req, res) => {
-	console.log(req.file.path, req.file.filename);
+app.post('/picadd', upload.single('pic_file'), async (req, res) => {
 	try {
 		await resize.makeThumbnail(req.file.path, {width:160, height:160}, 'thumbnails/' + req.file.filename);
-		await dbPics.insert(req.body.pic_title, req.body.pic_desc, req.file.filename);
-		res.redirect('/template');
+		await dbPics.insert((await dbUsers.getId(req.user.username)), req.body.pic_title, req.body.pic_desc, req.file.filename);
+		res.redirect('/');
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -113,17 +112,22 @@ app.get('/picget', async (req, res) => {
 	}
 });
 
+app.get('/getown', async (req, res) => {
+	if (req.user.username) {
+		try {
+			res.json(await dbPics.getOwner(await dbUsers.getId(req.user.username)));
+		} catch (e) {
+			console.log(e);
+			res.send('db error :(');
+		}
+	} else res.redirect('/');
+});
+
 app.get('/', (req, res) => {
 	console.log('Current logged in user:', req.user);
-	res.sendFile('./public/sign_up.html', {root: __dirname});
-});
-
-app.get('/register', (req, res) => {
-	console.log('Current logged in user:', req.user);
-	res.sendFile('./public/register.html', {root: __dirname});
-});
-
-
-app.get('/template', (req, res) => {
 	res.sendFile('./public/template.html', {root: __dirname});
+});
+
+app.get('/login', (req, res) => {
+	res.sendFile('./public/sign_up.html', {root: __dirname});
 });
