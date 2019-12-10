@@ -72,12 +72,12 @@ app.post('/useradd', async (req, res) => {
 	try {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
-		res.json(await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash));
+		await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash);
+		res.redirect('/');
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
 	}
-	res.redirect('/');
 });
 
 app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}), (req, res) => {
