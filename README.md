@@ -4,8 +4,8 @@
 ```
 npm i
 node project-app.js
-https://localhost:8088/
 ```
+### head to https://localhost:8088/ in your browser
 ### .env example
 ```
 DB_HOST=localhost
