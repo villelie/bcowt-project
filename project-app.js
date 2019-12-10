@@ -112,6 +112,16 @@ app.get('/picget', async (req, res) => {
 	}
 });
 
+app.put('/piclike', async (req, res) => {
+	try {
+		await dbPics.like(await dbUsers.getId('ville'));
+		res.redirect('/');
+	} catch (e) {
+		console.log(e);
+		res.send('db error :(');
+	}
+});
+
 app.get('/getown', async (req, res) => {
 	if (req.user.username) {
 		try {

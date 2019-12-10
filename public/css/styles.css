@@ -65,7 +65,7 @@
 #chk{
 	position: absolute;
 	visibility: hidden;
-	z-index: -1111;
+
 }
 
 .content{
@@ -94,7 +94,7 @@ hr {
 
 ul, span {
 	font-size:30px;
-	cursor:pointer;
+	
 }
 
 /*-------------------------------------------------------------------------------*/

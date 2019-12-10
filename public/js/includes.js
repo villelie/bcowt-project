@@ -7,10 +7,3 @@ fetch("./footer.html").then(response => {return response.text();}).then(data => 
 //Nav
 const openNav = () => document.getElementById("myNav").style.height = "100%";
 const closeNav = () => document.getElementById("myNav").style.height = "0%";
-
-//Likes
-document.querySelectorAll('.like').forEach(function(e) {
-	e.addEventListener('click', function() {
-		this.style.backgroundColor = "red";
-	});
-});

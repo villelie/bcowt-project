@@ -43,3 +43,13 @@ exports.insert = async (owner, title, description, file) => {
 		}
 	}
 };
+
+exports.like = async (id) => {
+	try {
+			const [results] = await connection.query('UPDATE pics SET pic_likes = pic_likes +1 WHERE pic_id = ?;', [id]);
+			return results;
+	} catch (e) {
+			console.log(e);
+			throw('db error :(');
+	}
+};
