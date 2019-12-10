@@ -29,6 +29,14 @@ function myFunction2() {
 
 }
 
+function close_tab() {
+    document.querySelector('#myDropdown').style.display = "none";
+}
+
+function close_tab2() {
+    document.querySelector('#myDropdown2').style.display = "none";
+}
+
 /*// Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
