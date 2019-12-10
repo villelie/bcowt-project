@@ -112,9 +112,9 @@ app.get('/picget', async (req, res) => {
 	}
 });
 
-app.put('/piclike', async (req, res) => {
+app.get('/piclike:id', async (req, res) => {
 	try {
-		await dbPics.like(await dbUsers.getId('ville'));
+		await dbPics.like(req.params.id);
 		res.redirect('/');
 	} catch (e) {
 		console.log(e);

@@ -4,7 +4,7 @@ const connection = require('../database/db');
 
 exports.getAll = async () => {
 	try {
-		const [results, fields] = await connection.query('SELECT pics.*, users.user_name as owner FROM pics JOIN users ON users.user_id = pics.owner_id;');
+		const [results, fields] = await connection.query('SELECT pics.*, users.user_name as owner FROM pics JOIN users ON users.user_id = pics.owner_id ORDER BY pics.pic_id DESC;');
 		return results;
 	} catch (e) {
 		console.log(e);

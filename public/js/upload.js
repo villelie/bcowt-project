@@ -12,9 +12,9 @@ const createPicCards = (pics) => {
 		const div4 = document.createElement('div');
 		div4.classList = 'container';
 		div4.appendChild(p2);
-		const p1 = document.createElement('p');
+		//const p1 = document.createElement('p');
 		const likes = pic.pic_likes;
-		p1.innerText = likes;
+		//p1.innerText = likes;
 		const div3 = document.createElement('div');
 		div3.className = 'likecontainer';
 		const but = document.createElement('button');
@@ -24,11 +24,10 @@ const createPicCards = (pics) => {
 		but.innerText = '♥ ' + likes;
 		but.addEventListener('click', () => {
 			const id = pic.pic_id;
-			console.log('like: ', id);
 			getLikes(id)
 		});
 		div3.appendChild(but)
-		div3.appendChild(p1);
+		//div3.appendChild(p1);
 		const img = document.createElement('img');
 		img.src = url + '/thumbnails/' + pic.pic_file;
 		img.alt = pic.pic_title;
@@ -40,8 +39,9 @@ const createPicCards = (pics) => {
 		const div1 = document.createElement('div');
 		div1.className = 'pic';
 		div1.appendChild(div2);
-		ul.prepend(div1);
+		ul.appendChild(div1);
 	});
+	console.log(document.cookie);
 };
 
 // AJAX call to fetch the pic and creation of pic card
@@ -55,14 +55,16 @@ const getPic = async () => {
 	}
 };
 //get amount of likes
-const getLikes = async (id) => {
-	try {
-		const response = await fetch(url + '/piclike', {method: 'PUT'});
-		const pics = await response.json();
-	} catch (e) {
-		console.log(e.message);
+const getLikes = async (value) => {
+	if (!document.cookie.includes('{' + value + '}')) { //horrible way to test if user has liked already, based on cookie that dies after browser restart
+		try {
+			await fetch(url + '/piclike' + value);
+			document.cookie += '{' + value + '}';
+		} catch (e) {
+			console.log(e.message);
+		}
+		getPic();
 	}
-	getPic();
 };
 
 getPic();
