@@ -72,12 +72,6 @@
 	padding: 0 20px;
 }
 
-.content img{
-	width: 100%;
-	max-width: 700px;
-	margin: 20px 0;
-}
-
 .content p{
 	text-align: justify;
 }
@@ -104,7 +98,8 @@ ul, span {
 }
 
 .pic {
-	width: 35%;
+	width: 90%;
+	max-width: 600px;
 	margin: auto;
 	padding: 20px
 }
@@ -115,10 +110,12 @@ img {
 
 div.imgbox {
 	width: 100%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 	display: inline-block;
 	background-color: white;
 }
+
+/* image card text area*/
 
 div.container {
 	padding: 30px;
@@ -229,7 +226,6 @@ i:hover, .show-menu-btn:hover, .hide-menu-btn:hover + .upload{
 /* css changes for mobile*/
 @media screen and (max-width:800px) {
 	.pic {
-		width: 60%;
 		margin: auto;
 		padding: 20px
 	}
