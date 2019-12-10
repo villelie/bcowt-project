@@ -4,6 +4,7 @@
 ```
 npm i
 node project-app.js
+https://localhost:8088/
 ```
 ### .env example
 ```
