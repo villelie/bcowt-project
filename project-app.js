@@ -94,7 +94,7 @@ app.get('/userlogout', async (req, res) => {
 
 app.post('/picadd', upload.single('pic_file'), async (req, res) => {
 	try {
-		await resize.makeThumbnail(req.file.path, {width:160, height:160}, 'thumbnails/' + req.file.filename);
+		await resize.makeThumbnail(req.file.path, {width:600, height:600}, 'thumbnails/' + req.file.filename);
 		await dbPics.insert((await dbUsers.getId(req.user.username)), req.body.pic_title, req.body.pic_desc, req.file.filename);
 		res.redirect('/');
 	} catch (e) {

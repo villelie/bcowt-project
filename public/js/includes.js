@@ -1,6 +1,8 @@
 'use strict';
 
-//Fetching header and footer, kinda useless again since we have one or two different pages.
+//Fetching header and footer of the html page, which are divided to different files
+//to make further cyustomizing easier
+//tho more useful on websites with multiple different html pages
 fetch("./header.html").then(response => {return response.text();}).then(data => {document.querySelector("header").innerHTML = data;});
 fetch("./footer.html").then(response => {return response.text();}).then(data => {document.querySelector("footer").innerHTML = data;});
 

@@ -44,7 +44,7 @@ const createPicCards = (pics) => {
 	});
 };
 
-// AJAX call
+// AJAX call to fetch the pic and creation of pic card
 const getPic = async () => {
 	try {
 		const response = await fetch(url + '/picget');
@@ -54,7 +54,7 @@ const getPic = async () => {
 		console.log(e.message);
 	}
 };
-
+//get amount of likes
 const getLikes = async (id) => {
 	try {
 		const response = await fetch(url + '/piclike', {method: 'PUT'});
