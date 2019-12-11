@@ -3,6 +3,7 @@ const url = 'https://localhost:8088'
 
 const ul = document.querySelector('ul');
 
+//Create picture cards using dom
 const createPicCards = (pics) => {
 	ul.innerHTML = '';
 	pics.forEach((pic) => {
@@ -41,9 +42,9 @@ const createPicCards = (pics) => {
 		div1.appendChild(div2);
 		ul.appendChild(div1);
 	});
-	console.log(document.cookie);
 };
 
+//Get pictures from db
 const getPic = async () => {
 	try {
 		const response = await fetch(url + '/picget');
@@ -54,6 +55,7 @@ const getPic = async () => {
 	}
 };
 
+//Get pictures from db that are send by logged in user
 const getOwn = async () => {
 	console.log('own');
 	try {
@@ -65,6 +67,7 @@ const getOwn = async () => {
 	}
 };
 
+//Update likes and check if current cookie has liked picture already.
 const getLikes = async (value) => {
 	if (!document.cookie.includes('{' + value + '}')) { 
 		try {
@@ -78,13 +81,15 @@ const getLikes = async (value) => {
 };
 
 
-
+//Edit navigation bar based on logged in user.
 const editForUser = (user) => {
 	const navupload = document.getElementById('navupload');
 	const navsignup = document.getElementById('navsignup');
 	const navsignin = document.getElementById('navsignin');
 	const navlogout = document.getElementById('navlogout');
 	const navprofile = document.getElementById('navprofile');
+	
+	//If there is user logged in, hide signup and signin buttons and show upload and profile
 	if(user) {
 		navupload.classList.remove('hidden');
 		navsignup.classList.add('hidden');
@@ -95,6 +100,7 @@ const editForUser = (user) => {
 	}	
 }
 
+//Get username and send that to editForUser()
 const getUser = async () => {
 	try {
 		const response = await fetch(url + '/getuser');
@@ -105,5 +111,6 @@ const getUser = async () => {
 	}
 }
 
+//"onLoad()"
 getUser();
 getPic();

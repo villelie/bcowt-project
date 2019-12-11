@@ -1,11 +1,8 @@
 'use strict';
-
 const express = require('express');
-// database
 const dbUsers = require('./models/bcowt-users');
 const dbPics = require('./models/bcowt-pics');
 const resize = require('./models/resize');
-// passport and authentication
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
@@ -16,6 +13,7 @@ const httpPort = 3033;
 
 app.use(express.urlencoded({extended: true}));
 
+//Options for express-session
 const sesOptions = {
 	secret: process.env.SESSION_SECRET,
 	resave: true,
@@ -25,6 +23,14 @@ const sesOptions = {
 
 app.use(require('express-session')(sesOptions));
 
+//Choose which secure cookie to use
+if (process.env.SERVER === 'server') {
+	app.set('trust proxy', 1);
+	sesOptions.cookie.secure = true;
+	console.log('Using secure cookie');
+} else console.log('Using unsecure cookie');
+
+//Passport-local strategy
 passport.use(new LocalStrategy(async (username, password ,done) => {
 	const userpass  = await dbUsers.getPass(username);
 	const pwdCheck = await bcrypt.compare(password, userpass);
@@ -37,13 +43,7 @@ passport.use(new LocalStrategy(async (username, password ,done) => {
 	}
 }));
 
-if (process.env.SERVER === 'server') {
-	app.set('trust proxy', 1);
-	sesOptions.cookie.secure = true;
-	console.log('Using secure cookie');
-} else console.log('Using unsecure cookie');
-
-
+//More passport stuff
 passport.serializeUser((user, done) => {
 	done(null, user.username);
 });
@@ -55,19 +55,23 @@ passport.deserializeUser((user, done) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Choose which secure script to use based on env file
 if (process.env.SERVER === 'local') {
 	require('./secure/localhost')(app);
+	console.log('Started on local, port:', httpPort);
 } else {
 	require('./secure/server')(app);
 	app.listen(httpPort, () => {
-		console.log('Started');
+		console.log('Started on server, port:', httpPort);
 	});
 }
 
+//Static folders
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
 
+//Adding user to database
 app.post('/useradd', async (req, res) => {
 	try {
 		const salt = bcrypt.genSaltSync(12);
@@ -80,18 +84,20 @@ app.post('/useradd', async (req, res) => {
 	}
 });
 
+//Logging user
 app.post('/userlogin', passport.authenticate('local', {failureRedirect:'./'}), (req, res) => {
 	console.log('At /userlogin - Current logged in user:', req.user);
 	res.redirect('./');
 });
 
+//Log out
 app.get('/userlogout', async (req, res) => {
 	req.logout();
 	console.log('At /userlogout - Current logged in user:', req.user);
 	res.redirect('./');
 });
 
-
+//Add picture to database
 app.post('/picadd', upload.single('pic_file'), async (req, res) => {
 	try {
 		await resize.makeThumbnail(req.file.path, {width:600, height:600}, 'thumbnails/' + req.file.filename);
@@ -103,6 +109,7 @@ app.post('/picadd', upload.single('pic_file'), async (req, res) => {
 	}
 });
 
+//Get all pics from database
 app.get('/picget', async (req, res) => {
 	try {
 		res.json(await dbPics.getAll());
@@ -112,6 +119,7 @@ app.get('/picget', async (req, res) => {
 	}
 });
 
+//Get specific pic from database with id to like
 app.get('/piclike:id', async (req, res) => {
 	try {
 		await dbPics.like(req.params.id);
@@ -122,6 +130,7 @@ app.get('/piclike:id', async (req, res) => {
 	}
 });
 
+//Get username, used to change navbar based on login status
 app.get('/getuser', async (req, res) => {
 	if (req.user.username) {
 		try {
@@ -133,6 +142,7 @@ app.get('/getuser', async (req, res) => {
 	} else res.redirect('./');
 });
 
+//Get pictures that are send by the user
 app.get('/getown', async (req, res) => {
 	if (req.user.username) {
 		try {
@@ -144,6 +154,7 @@ app.get('/getown', async (req, res) => {
 	} else res.redirect('./');
 });
 
+//Main redirect
 app.get('/', (req, res) => {
 	console.log('Current logged in user:', req.user);
 	res.sendFile('./public/template.html', {root: __dirname});

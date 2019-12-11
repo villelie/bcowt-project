@@ -1,5 +1,4 @@
 'use strict';
-
 const connection = require('../database/db');
 
 exports.getAll = async () => {
