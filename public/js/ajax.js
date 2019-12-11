@@ -2,9 +2,8 @@
 const url = 'https://localhost:8088'
 
 const ul = document.querySelector('ul');
-var likebuttonshown = false;
 
-const createPicCards = (pics, del) => {
+const createPicCards = (pics) => {
 	ul.innerHTML = '';
 	pics.forEach((pic) => {
 		const p2 = document.createElement('p');
@@ -22,13 +21,10 @@ const createPicCards = (pics, del) => {
 		but.className = 'like';
 		but.innerText = '♥ ' + likes;
 		const id = pic.pic_id;
-		if (likebuttonshown) { // can only press like button if logged
-			but.addEventListener('click', () => {
-				getLikes(id)
-			});
-		} else {
+		but.addEventListener('click', () => {
+			getLikes(id)
 			getLikes(id);
-		}
+		});
 		const span = document.createElement('span');
 		span.innerText = pic.owner + ': ' + pic.pic_title;
 		div3.appendChild(but);
@@ -60,10 +56,11 @@ const getPic = async () => {
 };
 
 const getOwn = async () => {
+	console.log('own');
 	try {
 		const response = await fetch(url + '/getown');
 		const pics = await response.json();
-		createPicCards(pics, del);
+		createPicCards(pics);
 	} catch (e) {
 		console.log(e.message);
 	}
@@ -90,7 +87,6 @@ const editForUser = (user) => {
 	const navlogout = document.getElementById('navlogout');
 	const navprofile = document.getElementById('navprofile');
 	if(user) {
-		likebuttonshown = true;
 		navupload.classList.remove('hidden');
 		navsignup.classList.add('hidden');
 		navsignin.classList.add('hidden');

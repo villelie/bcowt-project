@@ -122,16 +122,6 @@ app.get('/piclike:id', async (req, res) => {
 	}
 });
 
-app.get('/picdel:id', async (req, res) => {
-	try {
-		await dbPics.del(req.params.id);
-		res.redirect('./');
-	} catch (e) {
-		console.log(e);
-		res.send('db error :(');
-	}
-});
-
 app.get('/getuser', async (req, res) => {
 	if (req.user.username) {
 		try {

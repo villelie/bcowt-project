@@ -44,15 +44,6 @@ exports.insert = async (owner, title, description, file) => {
 	}
 };
 
-exports.del = async (id) => {
-	try {
-		const [results] = await connection.query('DELETE FROM pics WHERE pic_id = ?', [id]);
-		return results;
-	} catch (e) {
-		console.log(e);
-	}
-};
-
 exports.like = async (id) => {
 	try {
 			const [results] = await connection.query('UPDATE pics SET pic_likes = pic_likes +1 WHERE pic_id = ?;', [id]);
