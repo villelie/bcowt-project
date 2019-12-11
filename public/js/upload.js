@@ -61,6 +61,7 @@ const getPic = async () => {
 		console.log(e.message);
 	}
 };
+
 //get amount of likes
 const getLikes = async (value) => {
 	if (!document.cookie.includes('{' + value + '}')) { //horrible way to test if user has liked already, based on cookie that dies after browser restart
@@ -74,4 +75,32 @@ const getLikes = async (value) => {
 	}
 };
 
+//edit nav bar
+const editForUser = (user) => {
+	const navupload = document.getElementById('navupload');
+	const navsignup = document.getElementById('navsignup');
+	const navsignin = document.getElementById('navsignin');
+	const navlogout = document.getElementById('navlogout');
+	const navprofile = document.getElementById('navprofile');
+	if(user) {
+		navupload.classList.remove('hidden');
+		navsignup.classList.add('hidden');
+		navsignin.classList.add('hidden');
+		navlogout.classList.remove('hidden');
+		navprofile.classList.remove('hidden');
+		navprofile.innerText = user;
+	}	
+}
+
+const getUser = async () => {
+	try {
+		const response = await fetch(url + '/getuser');
+		const user = await response.json();
+		editForUser(user);
+	} catch (e) {
+		console.log(e.message);
+	}
+}
+
+getUser();
 getPic();

@@ -9,3 +9,13 @@ fetch("./footer.html").then(response => {return response.text();}).then(data => 
 //upload overlay open and close
 const openNav = () => document.getElementById("myNav").style.height = "100%";
 const closeNav = () => document.getElementById("myNav").style.height = "0%";
+
+
+const sign = (x) => {
+	const d0 = document.getElementById('drop0')
+	const d1 = document.getElementById('drop1')
+	d0.style.display = "none";
+	d1.style.display = "none";
+	if(x==0) d0.style.display = "block";
+	if(x==1) d1.style.display = "block";
+}

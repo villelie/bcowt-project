@@ -6,17 +6,15 @@
 	</label>
 
 	<ul class="menu">
-		<i class="fa fa-upload" onclick="openNav()"></i>
-		<a href="#">Home</a>
-		<!-- Register dropdown-->
-		<div class="dropdown">
-			<i onclick="myFunction()" class="dropbtn">Register</i>
-			<div id="myDropdown" class="dropdown-content">
+		<i class="fa fa-upload hidden" id="navupload" onclick="openNav()"></i>
+		<a href="./">Home</a>
+		<a href="#" class="dropdowns" id="navsignup" onclick="sign(0)">Sign up</a>
+			<div class="dropdown-content" id="drop0">
 				<div class="tabPanel">
 					<h2>Registration info</h2>
 					<form id="register_form " action="./useradd" method="post">
 						<label>
-							<input class="input_box" type="text" name="register_username" placeholder="Enter name">
+							<input class="input_box" type="text" name="register_username" placeholder="Enter username">
 						</label>
 						<label>
 							<input class="input_box" type="email" name="register_useremail" placeholder="Enter email">
@@ -24,33 +22,27 @@
 						<label>
 							<input class="input_box" type="password" name="register_userpass" placeholder="Enter password">
 						</label>
-						<input class="button" type="submit" value="register">
-						<span onclick="close_tab()" >&#10060;</span>
+						<input class="button" type="submit" value="Register"><input class="button cancel" onclick="sign()" value="Cancel">
 					</form>
 				</div>
 			</div>
-		</div>
-		<!-- login dropdown-->
-		<div class="dropdown">
-			<i  onclick="myFunction2()" class="drop_button">Login</i>
-			<div id="myDropdown2" class="dropdown-content">
+		<a href="#" class="dropdowns" id="navsignin" onclick="sign(1)">Sign in</a>
+			<div class="dropdown-content" id="drop1">
 				<div class="tabPanel">
 					<h2>Sign in</h2>
 					<form id="login_form " action="./userlogin" method="post">
 						<label>
-							<input class="input_box" type="text" name="username" placeholder="Enter name">
+							<input class="input_box" type="text" name="username" placeholder="Enter username">
 						</label>
 						<label>
 							<input class="input_box" type="password" name="password" placeholder="Enter password">
 						</label>
-						<input class="button" type="submit" value="sign in" >
-						<span onclick="close_tab2()" >&#10060;</span>
+						<input class="button" type="submit" value="Sign in"><input class="button cancel" onclick="sign()" value="Cancel">
 					</form>
 				</div>
 			</div>
-		</div>
-		<i>Logout</i>
-		<i>Profile</i>
+		<a href="./userlogout" class="hidden" id="navlogout">Logout</a>
+		<a href="#" class="hidden" id="navprofile">Profile</a>
 		<label for="chk" class="hide-menu-btn">
 			<i class="fas fa-times"></i>
 		</label>

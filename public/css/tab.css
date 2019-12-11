@@ -1,28 +1,11 @@
-
-
-.dropbtn {
-    color: white;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: inherit;
-}
-
-.dropdown {
-    float: none;
-    display: inline-block;
-}
-
 .dropdown-content {
     position: absolute;
+	top: 100;
+	right: 0;
+	margin: 5px;
     background-color: white;
     height: fit-content;
     display: none;
-    max-width: 45%;
-    min-width: 45%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -31,12 +14,12 @@
 
 .input_box{
     display: block;
-    margin-bottom: 8%;
+    margin: 20px auto;
     border: solid 3px #ccc;
     background: transparent;
     font-size: 1em;
     color: #ccc;
-    width: 86%;
+    width: 90%;
 }
 
 .button{
@@ -50,6 +33,12 @@
     transform: translateY(-50%);
 }
 
+.cancel {
+    width: 30%;
+	background: salmon;
+	margin-left: 25px;
+}
+
 .dropdown-content{
     color: black;
     padding: 12px 16px;
@@ -57,4 +46,15 @@
     text-align: left;
 }
 
-
+@media screen and (max-width:800px) {
+	.input_box{
+		margin: 50px auto;
+	}
+	
+	.dropdown-content {
+		top:0;
+		left:0;
+		width: 90vw;
+		margin: 100px auto;
+	}
+}

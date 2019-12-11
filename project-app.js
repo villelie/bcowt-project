@@ -122,6 +122,17 @@ app.get('/piclike:id', async (req, res) => {
 	}
 });
 
+app.get('/getuser', async (req, res) => {
+	if (req.user.username) {
+		try {
+			console.log('Sending username to js: ', req.user.username);
+			res.json(req.user.username);
+		} catch (e) {
+			console.log(e);
+		}
+	} else res.redirect('/');
+});
+
 app.get('/getown', async (req, res) => {
 	if (req.user.username) {
 		try {
@@ -136,8 +147,4 @@ app.get('/getown', async (req, res) => {
 app.get('/', (req, res) => {
 	console.log('Current logged in user:', req.user);
 	res.sendFile('./public/template.html', {root: __dirname});
-});
-
-app.get('/login', (req, res) => {
-	res.sendFile('./public/sign_up.html', {root: __dirname});
 });

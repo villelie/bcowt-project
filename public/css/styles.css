@@ -57,7 +57,7 @@
 .show-menu-btn i{
   line-height: 100px;
 }
-¨
+
 .menu a:hover, .show-menu-btn:hover, .hide-menu-btn:hover{
 	color: #62929e;
 }
@@ -221,7 +221,10 @@ i:hover, .show-menu-btn:hover, .hide-menu-btn:hover + .upload{
 	font-size: 1000px;
 	color: #d5d4cc;
 }
-	
+
+.hidden {
+	display: none !important;
+}
 
 /* css changes for mobile*/
 @media screen and (max-width:800px) {
