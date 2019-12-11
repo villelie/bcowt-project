@@ -23,6 +23,7 @@
 
 .logo{
 	line-height: 100px;
+	cursor: default;
 	float: left;
 	font-family: 'Lobster', cursive;
 	font-size: 50px;
@@ -55,7 +56,7 @@
 }
 
 .show-menu-btn i{
-  line-height: 100px;
+  line-height: 45px;
 }
 
 .menu a:hover, .show-menu-btn:hover, .hide-menu-btn:hover{
@@ -112,6 +113,7 @@ div.imgbox {
 	width: 100%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 	display: inline-block;
+	padding: 5px;
 	background-color: white;
 }
 
@@ -129,7 +131,7 @@ div.likecontainer {
 	width: 100%;
 }
 
-div.container p {
+div.container span {
 	text-align: center;
 }
 
@@ -142,11 +144,10 @@ button.like{
     color: #FFFFFF;
     text-align: center;
     font-size: 30px;
-    padding: 2x;
-    width: 40px;
+    padding: 10px;
     transition: all 0.2s;
     cursor: pointer;
-    margin: 5px;
+	margin-right: 25px;
 }
 
 button.like:hover {
@@ -228,6 +229,24 @@ i:hover, .show-menu-btn:hover, .hide-menu-btn:hover + .upload{
 
 /* css changes for mobile*/
 @media screen and (max-width:800px) {
+	.header{
+		height: 75px;
+	}
+	.footer {
+		height: 75px
+	}
+	.pic:first-of-type {
+		margin-top: 75px;
+	}
+	
+	.logo{
+		line-height: 75px;
+		float: left;
+		font-family: 'Lobster', cursive;
+		font-size: 35px;
+		padding: 0 20px;
+	}
+	
 	.pic {
 		margin: auto;
 		padding: 20px

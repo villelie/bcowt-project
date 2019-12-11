@@ -14,7 +14,7 @@ exports.getAll = async () => {
 
 exports.getOwner = async (id) => {
 	try {
-		const [results, fields] = await connection.query('SELECT * FROM pics WHERE owner_id = ?', [id]);
+		const [results, fields] = await connection.query('SELECT pics.*, users.user_name as owner FROM pics JOIN users ON users.user_id = pics.owner_id WHERE owner_id = ?', [id]);
 		return results;
 	} catch (e) {
 		console.log(e);
@@ -41,6 +41,15 @@ exports.insert = async (owner, title, description, file) => {
 			console.log(e);
 			throw('db error :(');
 		}
+	}
+};
+
+exports.del = async (id) => {
+	try {
+		const [results] = await connection.query('DELETE FROM pics WHERE pic_id = ?', [id]);
+		return results;
+	} catch (e) {
+		console.log(e);
 	}
 };
 

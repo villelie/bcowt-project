@@ -2,39 +2,37 @@
 const url = 'https://localhost:8088'
 
 const ul = document.querySelector('ul');
+var likebuttonshown = false;
 
-const createPicCards = (pics) => {
+const createPicCards = (pics, del) => {
 	ul.innerHTML = '';
 	pics.forEach((pic) => {
-		// create li with DOM methods
-		//pic ownder to pic card
 		const p2 = document.createElement('p');
-		p2.innerText = pic.pic_title + ' - ' + pic.pic_desc + ' - by: ' + pic.owner;
-		
+		p2.innerText = pic.pic_desc;
 		const div4 = document.createElement('div');
 		div4.classList = 'container';
 		div4.appendChild(p2);
-		//const p1 = document.createElement('p');
-		//pic likes to pic card
 		const p1 = document.createElement('p');
 		const likes = pic.pic_likes;
-		//p1.innerText = likes;
 		const div3 = document.createElement('div');
 		div3.className = 'likecontainer';
-		//button like click to database
 		const but = document.createElement('button');
 		but.type = 'button';
 		but.alt = pic.pic_id;
 		but.className = 'like';
 		but.innerText = '♥ ' + likes;
-		but.addEventListener('click', () => {
-			const id = pic.pic_id;
-			getLikes(id)
-		});
-		div3.appendChild(but)
-		//div3.appendChild(p1);
-		div3.appendChild(p1);		
-		//rescaled thumbnail of the photo to its place
+		const id = pic.pic_id;
+		if (likebuttonshown) { // can only press like button if logged
+			but.addEventListener('click', () => {
+				getLikes(id)
+			});
+		} else {
+			getLikes(id);
+		}
+		const span = document.createElement('span');
+		span.innerText = pic.owner + ': ' + pic.pic_title;
+		div3.appendChild(but);
+		div3.appendChild(span);
 		const img = document.createElement('img');
 		img.src = url + '/thumbnails/' + pic.pic_file;
 		img.alt = pic.pic_title;
@@ -51,7 +49,6 @@ const createPicCards = (pics) => {
 	console.log(document.cookie);
 };
 
-// AJAX call to fetch the pic and creation of pic card
 const getPic = async () => {
 	try {
 		const response = await fetch(url + '/picget');
@@ -62,9 +59,18 @@ const getPic = async () => {
 	}
 };
 
-//get amount of likes
+const getOwn = async () => {
+	try {
+		const response = await fetch(url + '/getown');
+		const pics = await response.json();
+		createPicCards(pics, del);
+	} catch (e) {
+		console.log(e.message);
+	}
+};
+
 const getLikes = async (value) => {
-	if (!document.cookie.includes('{' + value + '}')) { //horrible way to test if user has liked already, based on cookie that dies after browser restart
+	if (!document.cookie.includes('{' + value + '}')) { 
 		try {
 			await fetch(url + '/piclike' + value);
 			document.cookie += '{' + value + '}';
@@ -75,7 +81,8 @@ const getLikes = async (value) => {
 	}
 };
 
-//edit nav bar
+
+
 const editForUser = (user) => {
 	const navupload = document.getElementById('navupload');
 	const navsignup = document.getElementById('navsignup');
@@ -83,6 +90,7 @@ const editForUser = (user) => {
 	const navlogout = document.getElementById('navlogout');
 	const navprofile = document.getElementById('navprofile');
 	if(user) {
+		likebuttonshown = true;
 		navupload.classList.remove('hidden');
 		navsignup.classList.add('hidden');
 		navsignin.classList.add('hidden');
