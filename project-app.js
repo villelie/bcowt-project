@@ -73,22 +73,22 @@ app.post('/useradd', async (req, res) => {
 		const salt = bcrypt.genSaltSync(12);
 		const hash = bcrypt.hashSync(req.body.register_userpass, salt);
 		await dbUsers.insert(req.body.register_username, req.body.register_useremail, hash);
-		res.redirect('/');
+		res.redirect('./');
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
 	}
 });
 
-app.post('/userlogin', passport.authenticate('local', {failureRedirect:'/'}), (req, res) => {
+app.post('/userlogin', passport.authenticate('local', {failureRedirect:'./'}), (req, res) => {
 	console.log('At /userlogin - Current logged in user:', req.user);
-	res.redirect('/');
+	res.redirect('./');
 });
 
 app.get('/userlogout', async (req, res) => {
 	req.logout();
 	console.log('At /userlogout - Current logged in user:', req.user);
-	res.redirect('/');
+	res.redirect('./');
 });
 
 
@@ -96,7 +96,7 @@ app.post('/picadd', upload.single('pic_file'), async (req, res) => {
 	try {
 		await resize.makeThumbnail(req.file.path, {width:600, height:600}, 'thumbnails/' + req.file.filename);
 		await dbPics.insert((await dbUsers.getId(req.user.username)), req.body.pic_title, req.body.pic_desc, req.file.filename);
-		res.redirect('/');
+		res.redirect('./');
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -115,7 +115,7 @@ app.get('/picget', async (req, res) => {
 app.get('/piclike:id', async (req, res) => {
 	try {
 		await dbPics.like(req.params.id);
-		res.redirect('/');
+		res.redirect('./');
 	} catch (e) {
 		console.log(e);
 		res.send('db error :(');
@@ -130,7 +130,7 @@ app.get('/getuser', async (req, res) => {
 		} catch (e) {
 			console.log(e);
 		}
-	} else res.redirect('/');
+	} else res.redirect('./');
 });
 
 app.get('/getown', async (req, res) => {
@@ -141,7 +141,7 @@ app.get('/getown', async (req, res) => {
 			console.log(e);
 			res.send('db error :(');
 		}
-	} else res.redirect('/');
+	} else res.redirect('./');
 });
 
 app.get('/', (req, res) => {
