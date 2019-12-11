@@ -10,7 +10,7 @@ fetch("./footer.html").then(response => {return response.text();}).then(data => 
 const openNav = () => document.getElementById("myNav").style.height = "100%";
 const closeNav = () => document.getElementById("myNav").style.height = "0%";
 
-
+//show sign forms, x is telling me which form to show, 0=signup 1=signin and null=hide both
 const sign = (x) => {
 	const d0 = document.getElementById('drop0')
 	const d1 = document.getElementById('drop1')
