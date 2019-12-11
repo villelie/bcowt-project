@@ -1,5 +1,4 @@
 # Basic Concepts of Web Technology - Project
-![Danin koodi](https://i.imgur.com/4kyBaWv.jpg)
 ## TODO when cloning to local/server
 If using on a server, we assume you have made changes to apache/httpd/firewall before continuing:
 1. Clone to your local/server. `git clone https://github.com/villelie/bcowt-project.git`
@@ -26,3 +25,4 @@ KEY=./ca.key
 CERT=./ca.crt
 SESSION_SECRET=sikret
 ```
+![Danin koodi](https://i.imgur.com/4kyBaWv.jpg)
