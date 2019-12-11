@@ -22,7 +22,6 @@ const createPicCards = (pics) => {
 		but.innerText = '♥ ' + likes;
 		const id = pic.pic_id;
 		but.addEventListener('click', () => {
-			getLikes(id)
 			getLikes(id);
 		});
 		const span = document.createElement('span');
